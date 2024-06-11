@@ -1,0 +1,139 @@
+/* .allBookItems{
+    max-width: 40em;
+    margin: 0 auto; 
+    line-height: 30px;
+    padding: 0;
+  } */
+
+  
+  .book-details {
+    display: flex;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-left: 0px;
+    flex: 1 1 600px; 
+    text-align: left;
+    flex-wrap: wrap;
+    
+  }
+ 
+  .headerDetails{
+      /* overflow-wrap: break-word; */
+      flex: 1;
+  }
+  
+  .book-cover {
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 15px;    
+  }
+  
+  .book-title {
+      font-size: 2.2em;
+      color:darkgreen;
+      margin-top: 12;
+      margin-bottom: 12;
+      margin-left: 0;
+      font-family: "Titillium Web", sans-serif;
+      font-weight: 600;
+      font-style: normal;
+  }
+  
+  .spanElements{
+    display: flex;
+    justify-content:space-between;
+  }
+
+  .book-author {
+      color: #555;
+      margin: 5px 0;
+      font-family: "Titillium Web", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      
+  }
+  
+  .book-rating, .book-date{
+      font-variant: small-caps;
+      color:#555;    
+    }
+  
+  .book-recomendation{
+    color:#7e7e7e;
+    font-family: "Cactus Classical Serif", serif;
+      font-weight: 200;
+      font-style: normal;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #7e7e7e;
+  
+      word-spacing: 0.4em;
+  /*  ye posts mei hoga post mei nhi  */
+  
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+  }
+
+    
+    .book-review {
+      margin-top: 10px;
+  
+      font-family: "Cactus Classical Serif", serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 18px;
+      line-height: 1.6;
+      color: #7e7e7e;
+      
+      word-spacing: 0.4em;
+  
+      /* ye posts mei hoga post mei nhi */
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 6;
+      -webkit-box-orient: vertical;
+  
+        /* white-space: pre-wrap; */
+        /* overflow-wrap: break-word;  */
+    }
+  
+    .clearFloat{
+      display: block;
+    }
+
+    .book-Link>a, .bookNotes>link{
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .book-Link>a:hover, .bookNotes>link:hover{
+      color: darkgreen;
+      transition: width 0.3s;
+    }    
+  
+    @media (max-width: 768px) {
+      .book-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+    
+      .book-cover {
+        margin-right: 0;
+        margin-bottom: 15px;
+      }
+    
+      .book-details {
+        margin-left: 0;
+      }
+    }
+    
+  

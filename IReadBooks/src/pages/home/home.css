@@ -1,0 +1,22 @@
+.bar{
+    margin-bottom: 10px;
+}
+
+/* .bookList > {
+    overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 6;
+      -webkit-box-orient: vertical;
+  
+        white-space: pre-wrap;
+        overflow-wrap: break-word;
+    
+
+} */
+
+/* .bookList:hover{
+    font-size: 20px;
+    transition: width 0.3s;
+    
+} */
