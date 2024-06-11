@@ -1,11 +1,29 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import BookComp from '../../components/bookCompo/bookCompo.jsx'
-import data from '../../data.js'
+import {fetchReturnData} from '../../data'
 import { useParams } from 'react-router-dom'
 
 export default function Book() {
+
   const {id} = useParams()
   const numId = parseInt(id, 10)
+
+  
+  const [data, setData] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const responseData = await fetchReturnData();
+                setData(responseData);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
   const book = data.find((b) => b.id === numId);
 
 

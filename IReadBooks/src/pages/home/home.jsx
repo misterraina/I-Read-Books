@@ -1,11 +1,25 @@
 import './home.css'
-import data from '../../data'
+import React, {useEffect, useState} from 'react'
+import {fetchReturnData} from '../../data'
 import BookItems from '../../components/bookItems/bookItems'
 import Header from '../../components/header/header' 
 
-const apiCover = "https://covers.openlibrary.org/b/$key/$value-$size.jpg"
-
 export default function Home() {
+
+  const [data, setData] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const responseData = await fetchReturnData();
+                setData(responseData);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
   
   return (
     <div className='home'>
