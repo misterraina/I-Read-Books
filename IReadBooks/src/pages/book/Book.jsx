@@ -1,48 +1,42 @@
-import React, {useEffect, useState} from 'react'
-import BookComp from '../../components/bookCompo/bookCompo.jsx'
-import {fetchReturnData} from '../../data'
-import { useParams } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import BookComp from '../../components/bookCompo/bookCompo.jsx';
+import { useParams } from 'react-router-dom';
+import { fetchData } from '../../data'; // Assuming fetchData is your API call function
 
 export default function Book() {
+  const { id } = useParams();
+  const [book, setBook] = useState(null);
 
-  const {id} = useParams()
-  const numId = parseInt(id, 10)
+  useEffect(() => {
+    const fetchBookData = async () => {
+      try {
+        const booksData = await fetchData(); // Assuming fetchData fetches all books
+        const foundBook = booksData.find(book => book.book_id === parseInt(id, 10)); // Find book by id
+        setBook(foundBook); // Set found book to state
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
 
-  
-  const [data, setData] = useState([]);
+    fetchBookData();
+  }, [id]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const responseData = await fetchReturnData();
-                setData(responseData);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-
-        fetchData();
-    }, []);
-
-  const book = data.find((b) => b.id === numId);
-
-
-  if (!book){
-    return <div>Book not</div>
+  if (!book) {
+    return <div>Loading...</div>;
   }
+
   return (
-    <div className="book" >
+    <div className="book">
       <BookComp
-      bookName = {book.book}
-      bookImage = {book.Bimage}
-      bookWriter = {book.writer}
-      bookRating = {book.rating}
-      bookDate = {book.Bdate}
-      bookRecommend = {book.recommend}
-      bookReview = {book.review}
-      bookLink = {book.amazon}
+        bookName={book.book_name}
+        bookImage={book.cover_image_api}
+        bookWriter={book.author_name}
+        bookRating={book.rating}
+        bookDate={new Date(book.published_date).toLocaleDateString()}
+        bookRecommend={book.notes}
+        bookReview={book.review}
+        bookLink={book.amazon_link}
       />
-      {/* <h1>{typeof(numId)}</h1> */}
     </div>
-  )
+  );
 }
