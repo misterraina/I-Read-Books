@@ -6,9 +6,8 @@ import bookRoutes from './routes/routes.js'
 const app = express()
 
 app.use(cors({
-    origin:["https://i-read-books.vercel.app/"],
-    methods: ["POST", "GET"],
-    credentials: true
+    origin: 'https://i-read-books.vercel.app/',
+    optionsSuccessStatus: 200
 }))
 
 app.use(express.urlencoded({extended: true}))
