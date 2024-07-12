@@ -5,7 +5,11 @@ import bookRoutes from './routes/routes.js'
 
 const app = express()
 
-app.use(cors())
+app.use(cors({
+    origin:["https://i-read-books.vercel.app/"],
+    methods: ["POST", "GET"],
+    credentials: true
+}))
 
 app.use(express.urlencoded({extended: true}))
 app.use(express.static("public"))
