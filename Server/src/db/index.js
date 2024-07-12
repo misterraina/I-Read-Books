@@ -1,15 +1,20 @@
 import pg from "pg";
-import { DB_HOST, DB_USER, DB_NAME } from '../constants.js';
 import dotenv from 'dotenv';
+
+const { Pool } = pg;
 
 dotenv.config();
 
-const db = new pg.Client({
-    user: DB_USER,
-    host: DB_HOST,
-    database: DB_NAME,
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT,
+// const db = new pg.Client({
+//     user: DB_USER,
+//     host: DB_HOST,
+//     database: DB_NAME,
+//     password: process.env.DB_PASSWORD,
+//     port: process.env.DB_PORT,
+// })
+
+const db = new Pool({
+  connectionString: process.env.POSTGRES_URL,
 })
 
 const connectDb = async () => { 
