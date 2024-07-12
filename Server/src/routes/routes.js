@@ -4,11 +4,7 @@ import {createBook, getBook, getBooks, deleteBook, getSortedBooksController} fro
 const router =  express.Router()
 
 router.post('/', createBook)
-// router.get('/',getBooks)
-router.get('/',(req, res) => {
-    res.json({message: 'homepage'})
-})
-
+router.get('/',getBooks)
 router.get('/:id', getBook)
 router.delete('/:id', deleteBook);
 router.get('/sort', getSortedBooksController)

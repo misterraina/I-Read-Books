@@ -11,7 +11,7 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.static("public"))
 app.use(express.json())
 
-app.use('/', bookRoutes);       
+app.use('/api/books', bookRoutes);       
 
 // app.use(cors({
 //     origin: process.env.CORS_ORIGIN,
