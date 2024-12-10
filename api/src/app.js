@@ -8,9 +8,10 @@ const app = express();
 app.use(cookieParser());
 
 const corsOptions = {
-    origin: process.env.NODE_ENV === 'production'
-    ? 'https://i-read-books-k61i.vercel.app' // Production frontend URL
-    : 'http://localhost:5173',               // Local development frontend URL
+    origin: [
+        'https://i-read-books-k61i.vercel.app', // Production frontend URL
+        'http://localhost:5173'                 // Local development frontend URL
+    ],
     credentials: true, // Allow credentials (cookies)
     allowedHeaders: ['Authorization', 'Content-Type'],
 };
