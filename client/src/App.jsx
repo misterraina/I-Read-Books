@@ -17,6 +17,7 @@ import { AuthProvider } from "./AuthContext";
 import ProtectedRoute from "./components/admin/ProtectedRoute";
 import Login from "./components/admin/Login";
 
+
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(

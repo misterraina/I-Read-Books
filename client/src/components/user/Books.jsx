@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import BookModal from "./BookModal";
+import { REACT_APP_API_BACKEND } from "../../const";
 
 const Books = () => {
   const [books, setBooks] = useState([]);
@@ -18,8 +19,10 @@ const Books = () => {
     setLoading(true);
     try {
       const endpoint = sortOption
-        ? `http://localhost:3000/books/sorted?sortBy=${sortOption}`
-        : "http://localhost:3000/books"; // Default endpoint if no sorting selected
+  ? `${REACT_APP_API_BACKEND}/books/sorted?sortBy=${sortOption}`
+  : `${REACT_APP_API_BACKEND}/books`;
+
+
       const response = await axios.get(endpoint);
       setBooks(response.data);
     } catch (err) {
