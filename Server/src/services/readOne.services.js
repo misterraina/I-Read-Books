@@ -2,8 +2,16 @@ import { db } from "../db/index.js";
 
 async function getOneBook(bookId) {
     try {
-        const res = await db.query(
-            `SELECT 
+        // Ensure bookId is parsed as an integer
+        bookId = parseInt(bookId, 10);
+
+        // Validate bookId is a number
+        if (isNaN(bookId)) {
+            throw new Error('Invalid book ID');
+        }
+
+        const query = `
+            SELECT 
                 books.id AS book_id,
                 books.name AS book_name,
                 authors.name AS author_name,
@@ -24,16 +32,15 @@ async function getOneBook(bookId) {
                 reviews ON books.id = reviews.book_id
             LEFT JOIN 
                 links ON books.id = links.book_id
-            WHERE 
-                books.id = $1`, [bookId]);
+            WHERE books.id = $1
+        `;
 
-        return res.rows
+        const res = await db.query(query, [bookId]);
+        return res.rows[0];
     } catch (err) {
-        console.error(err);
+        console.error('Error executing getOneBook query:', err);
+        throw err;
     }
-    //  finally {
-    //     client.release();
-    // }
 }
 
-export default getOneBook
+export default getOneBook;

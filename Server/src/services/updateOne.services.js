@@ -1,57 +1,88 @@
+// src/services/bookService.js
 import { db } from "../db/index.js";
 
-async function updateBookById(bookId, bookData) {
-    const client = await db.connect();
+export async function updateBook(bookId, bookData) {
+    const { authorName, bookName, publishedDate, rating, readDate, review, notes, amazonLink, coverImageApi } = bookData;
+
     try {
-        await client.query('BEGIN');
+        await db.query('BEGIN');
 
-        const { name, author_id, published_date, rating, read_date, review, notes, amazon_link, cover_image_api } = bookData;
-
-        const updateBook = `
-            UPDATE books
-            SET name = $1, author_id = $2, published_date = $3
-            WHERE id = $4
-            RETURNING *`;
-
-        const bookRes = await client.query(updateBook, [name, author_id, published_date, bookId]);
-        if (bookRes.rowCount === 0) {
-            throw new Error('Book not found');
+        let authorId;
+        if (authorName) {
+            const authorResult = await db.query(`
+                INSERT INTO authors (name) 
+                VALUES ($1) 
+                ON CONFLICT (name) DO UPDATE SET name = EXCLUDED.name
+                RETURNING id
+            `, [authorName]);
+            authorId = authorResult.rows[0].id;
         }
 
-        if (rating !== undefined || read_date !== undefined) {
-            const updateRating = `
-                UPDATE ratings
-                SET rating = $1, read_date = $2
-                WHERE book_id = $3`;
-            await client.query(updateRating, [rating, read_date, bookId]);
+        if (bookName || authorId || publishedDate) {
+            const updateBookQuery = `
+                UPDATE books 
+                SET 
+                    ${bookName ? 'name = $1,' : ''}
+                    ${authorId ? 'author_id = $2,' : ''}
+                    ${publishedDate ? 'published_date = $3,' : ''}
+                WHERE id = $4
+            `.replace(/,\s*WHERE/, ' WHERE');
+
+            await db.query(updateBookQuery, [
+                bookName, 
+                authorId, 
+                publishedDate, 
+                bookId
+            ].filter(Boolean));
         }
 
-        if (review !== undefined || notes !== undefined) {
-            const updateReview = `
-                UPDATE reviews
-                SET review = $1, notes = $2
-                WHERE book_id = $3`;
-            await client.query(updateReview, [review, notes, bookId]);
+        if (rating || readDate) {
+            await db.query(`
+                UPDATE ratings 
+                SET 
+                    ${rating ? 'rating = $1,' : ''}
+                    ${readDate ? 'read_date = $2,' : ''}
+                WHERE book_id = $3
+            `.replace(/,\s*WHERE/, ' WHERE'), [
+                rating, 
+                readDate, 
+                bookId
+            ].filter(Boolean));
         }
 
-        if (amazon_link !== undefined || cover_image_api !== undefined) {
-            const updateLink = `
-                UPDATE links
-                SET amazon_link = $1, cover_image_api = $2
-                WHERE book_id = $3`;
-            await client.query(updateLink, [amazon_link, cover_image_api, bookId]);
+        if (review || notes) {
+            await db.query(`
+                UPDATE reviews 
+                SET 
+                    ${review ? 'review = $1,' : ''}
+                    ${notes ? 'notes = $2,' : ''}
+                WHERE book_id = $3
+            `.replace(/,\s*WHERE/, ' WHERE'), [
+                review, 
+                notes, 
+                bookId
+            ].filter(Boolean));
         }
 
-        await client.query('COMMIT');
-        return { message: 'Book updated successfully' };
+        if (amazonLink || coverImageApi) {
+            await db.query(`
+                UPDATE links 
+                SET 
+                    ${amazonLink ? 'amazon_link = $1,' : ''}
+                    ${coverImageApi ? 'cover_image_api = $2,' : ''}
+                WHERE book_id = $3
+            `.replace(/,\s*WHERE/, ' WHERE'), [
+                amazonLink, 
+                coverImageApi, 
+                bookId
+            ].filter(Boolean));
+        }
+
+        await db.query('COMMIT');
+        console.log('Book data updated successfully');
     } catch (err) {
-        await client.query('ROLLBACK');
+        await db.query('ROLLBACK');
         console.error('Error updating book data', err);
         throw err;
-    } 
-    // finally {
-    //     client.release();
-    // }
+    }
 }
-
-export default updateBookById;
