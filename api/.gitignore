@@ -1,0 +1,43 @@
+# Node.js dependencies
+node_modules/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# IDE/editor folders
+.vscode/
+.idea/
+
+# Build output
+/dist
+/build
+
+# Temporary files
+tmp/
+temp/
+
+# Optional files
+coverage/
+
+# Sequelize migration files (if generated in a separate folder)
+migrations/
+
+# Optional: If you use PM2
+pids/
+
+# Optional: If you use a lock file
+package-lock.json
+yarn.lock
