@@ -8,7 +8,7 @@ const app = express();
 app.use(cookieParser());
 
 const corsOptions = {
-    origin: "http://localhost:5173", // Replace with your frontend's origin
+    origin: "https://i-read-books-k61i.vercel.app", // Replace with your frontend's origin
     credentials: true, // Allow credentials (cookies)
     allowedHeaders: ['Authorization', 'Content-Type'],
 };
