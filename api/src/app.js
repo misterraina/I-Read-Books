@@ -8,9 +8,7 @@ const app = express();
 app.use(cookieParser());
 
 const corsOptions = {
-    origin: [
-        '*'                 // Local development frontend URL
-    ],
+    origin: ['http://localhost:5173'],
     credentials: true, // Allow credentials (cookies)
     allowedHeaders: ['Authorization', 'Content-Type'],
 };
