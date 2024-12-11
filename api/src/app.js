@@ -8,7 +8,7 @@ const app = express();
 app.use(cookieParser());
 
 const corsOptions = {
-    origin: ['https://i-read-books-k61i.vercel.app/'],
+    origin: ['https://i-read-books-k61i.vercel.app'],
     credentials: true, // Allow credentials (cookies)
     allowedHeaders: ['Authorization', 'Content-Type'],
 };
