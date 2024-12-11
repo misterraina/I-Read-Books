@@ -1,6 +1,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import { REACT_APP_API_BACKEND } from "./const";
 
 const AuthContext = createContext();
 
@@ -11,7 +12,7 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const validateToken = async () => {
             try {
-                const response = await fetch("http://localhost:3000/auth/validate-token", {
+                const response = await fetch(`${REACT_APP_API_BACKEND}/auth/validate-token`, {
                     method: "GET",
                     credentials: "include", // Include cookies in requests
                 });
@@ -35,7 +36,7 @@ export const AuthProvider = ({ children }) => {
     const login = () => setIsAuthenticated(true);
     const logout = async () => {
         try {
-            const response = await fetch('http://localhost:3000/auth/logout', {
+            const response = await fetch(`${REACT_APP_API_BACKEND}/auth/logout`, {
                 method: 'POST',
                 credentials: 'include', // Include cookies in the request
             });

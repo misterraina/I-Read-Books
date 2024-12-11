@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Cookies from 'js-cookie';
+import { REACT_APP_API_BACKEND } from "../../const";
 
 const AddBook = () => {
   const [formData, setFormData] = useState({
@@ -44,7 +45,7 @@ const AddBook = () => {
             return;
         }
 
-        await axios.post("http://localhost:3000/books", formData, {
+        await axios.post(`${REACT_APP_API_BACKEND}/books`, formData, {
             headers: { Authorization: `Bearer ${adminToken}` },
             withCredentials: true, // Include cookies
         });

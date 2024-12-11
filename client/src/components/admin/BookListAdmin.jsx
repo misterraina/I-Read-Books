@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
-
+import { REACT_APP_API_BACKEND } from "../../const";
 const BookListAdmin = () => {
   const [books, setBooks] = useState([]);
   const [error, setError] = useState("");
@@ -14,7 +14,7 @@ const BookListAdmin = () => {
 
   const fetchBooks = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/books");
+      const response = await axios.get(`${REACT_APP_API_BACKEND}/books`);
       setBooks(response.data);
     } catch (err) {
       console.error("Error fetching books:", err);
@@ -31,7 +31,7 @@ const BookListAdmin = () => {
                 setError("Authentication token not found. Please log in again.");
                 return;
             }
-            await axios.delete(`http://localhost:3000/books/${id}`, {
+            await axios.delete(`${REACT_APP_API_BACKEND}/books/${id}`, {
                 headers: { Authorization: `Bearer ${adminToken}` },
                 withCredentials: true, 
             });

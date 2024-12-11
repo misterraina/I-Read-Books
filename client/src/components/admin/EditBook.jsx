@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Cookies from 'js-cookie';
+import { REACT_APP_API_BACKEND } from "../../const";
 
 const EditBook = () => {
     const { id: bookId } = useParams();
@@ -63,7 +64,7 @@ const EditBook = () => {
             return;
         }
 
-        await axios.patch(`http://localhost:3000/books/${bookId}`, updatedData, {
+        await axios.patch(`${REACT_APP_API_BACKEND}/books/${bookId}`, updatedData, {
             headers: { Authorization: `Bearer ${adminToken}` },
             withCredentials: true, // Include cookies
         });
