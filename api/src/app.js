@@ -9,7 +9,7 @@ app.use(cookieParser());
 
 const corsOptions = {
     // origin: ['https://i-read-books-k61i.vercel.app'],
-    origin: ['*'],
+    origin: ['http://localhost:5173/'],
     credentials: true, // Allow credentials (cookies)
     allowedHeaders: ['Authorization', 'Content-Type'],
 };
