@@ -54,10 +54,10 @@ authRoute.post('/login', async (req, res) => {
 
         // Set token in an HTTP-only cookie
         res.cookie('adminToken', token, {
-            httpOnly: false,
-            secure: process.env.NODE_ENV === 'production',
+            httpOnly: true,
+            secure: true,
             maxAge: 90 * 60 * 1000, // 90 minutes
-            sameSite: 'lax', // Adjust depending on your frontend-backend setup
+            sameSite: 'None', // Adjust depending on your frontend-backend setup
             path: '/', 
         });
 
