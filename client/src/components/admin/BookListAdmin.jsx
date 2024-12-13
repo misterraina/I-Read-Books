@@ -36,7 +36,7 @@ const BookListAdmin = () => {
             //     return;
             // }
             await axios.delete(`${REACT_APP_API_BACKEND}/books/${id}`, {
-                headers: { Authorization: `Bearer ${adminToken}` },
+                // headers: { Authorization: `Bearer ${adminToken}` },
                 withCredentials: true, 
             });
             setBooks((prevBooks) => prevBooks.filter((book) => book.id !== id));

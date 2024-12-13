@@ -49,7 +49,7 @@ const AddBook = () => {
         // }
 
         await axios.post(`${REACT_APP_API_BACKEND}/books`, formData, {
-            headers: { Authorization: `Bearer ${adminToken}` },
+            // headers: { Authorization: `Bearer ${adminToken}` },
             withCredentials: true, // Include cookies
         });
 

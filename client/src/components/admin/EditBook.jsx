@@ -65,7 +65,7 @@ const EditBook = () => {
         // }
 
         await axios.patch(`${REACT_APP_API_BACKEND}/books/${bookId}`, updatedData, {
-            headers: { Authorization: `Bearer ${adminToken}` },
+            // headers: { Authorization: `Bearer ${adminToken}` },
             withCredentials: true, // Include cookies
         });
 
