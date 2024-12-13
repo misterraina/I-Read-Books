@@ -12,10 +12,10 @@ router.get('/sorted', getBooksSorted);
 
 
 // PATCH /books/:id - Update a book by ID (partial update)
-router.patch('/:id',verifyAdmin, updateBook);
+router.patch('/:id', updateBook);
 
 // POST /books - Add a new book
-router.post('/',verifyAdmin, createBook);
+router.post('/', createBook);
 
 // DELETE /books/:id - Delete a book by ID
 router.delete('/:id',verifyAdmin, deleteBook);
