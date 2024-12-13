@@ -26,7 +26,11 @@ const BookListAdmin = () => {
     const confirmed = window.confirm("Are you sure you want to delete this book?");
     if (confirmed) {
         try {
+          // console.log(document.cookie); // To see all cookies available
+
             const adminToken = Cookies.get('adminToken');
+            // console.log(adminToken);
+            
             if (!adminToken) {
                 setError("Authentication token not found. Please log in again.");
                 return;

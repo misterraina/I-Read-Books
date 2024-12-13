@@ -54,10 +54,10 @@ authRoute.post('/login', async (req, res) => {
 
         // Set token in an HTTP-only cookie
         res.cookie('adminToken', token, {
-            httpOnly: true,
-            secure: true,
+            httpOnly: false,
+            secure: false,
             maxAge: 90 * 60 * 1000, // 90 minutes
-            sameSite: 'None', // Adjust depending on your frontend-backend setup
+            sameSite: 'Lax', // Adjust depending on your frontend-backend setup
             path: '/', 
         });
 
@@ -70,7 +70,7 @@ authRoute.post('/login', async (req, res) => {
 });
 
 authRoute.get('/validate-token', (req, res) => {
-    const token = req.cookies.adminToken; // Ensure cookies middleware is set up
+    const token = req.cookies?.adminToken; // Ensure cookies middleware is set up
 
     if (!token) {
         return res.status(401).json({ error: 'No token provided' });
@@ -90,8 +90,8 @@ authRoute.post('/logout', (req, res) => {
     // Clear the cookie by setting its expiration to the past
     res.clearCookie('adminToken', {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict', // Adjust SameSite as per your app's needs
+        secure: false,
+        sameSite: 'Lax', // Adjust SameSite as per your app's needs
         path: '/', // Match the path of the cookie
     });
     res.status(200).json({ message: 'Logout successful' });

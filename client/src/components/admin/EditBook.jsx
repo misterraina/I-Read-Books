@@ -60,7 +60,7 @@ const EditBook = () => {
     try {
         const adminToken = Cookies.get("adminToken");
         if (!adminToken) {
-            setError("Authentication token not found. Please log in again.");
+          setMessage("Authentication token not found. Please log in again.");
             return;
         }
 

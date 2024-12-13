@@ -40,10 +40,13 @@ const AddBook = () => {
     e.preventDefault();
     try {
       const adminToken = Cookies.get("adminToken");
-        if (!adminToken) {
-            setError("Authentication token not found. Please log in again.");
-            return;
-        }
+      console.log(adminToken);
+      
+      if (!adminToken) throw new Error("Token missing");
+        // if (!adminToken) {
+        //   setMessage("Authentication token not found. Please log in again.");
+        //     return;
+        // }
 
         await axios.post(`${REACT_APP_API_BACKEND}/books`, formData, {
             headers: { Authorization: `Bearer ${adminToken}` },
@@ -68,9 +71,13 @@ const AddBook = () => {
         },
       });
     } catch (error) {
+      if (error.response?.status === 401) {
+          setMessage("Your session has expired. Please log in again.");
+      } else {
+          setMessage("Failed to add book.");
+      }
       console.error("Error adding book:", error);
-      setMessage("Failed to add book.");
-    }
+  }
   };
 
   return (

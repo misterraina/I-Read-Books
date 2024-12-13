@@ -12,6 +12,7 @@ export const verifyToken = (req, res, next) => {
         req.user = decoded; // Assuming token contains user data (e.g., id, username, isAdmin)
         next();
     } catch (error) {
+        console.error("Token verification error:", error.message);
         res.status(401).json({ error: 'Invalid or expired token' });
     }
 };
