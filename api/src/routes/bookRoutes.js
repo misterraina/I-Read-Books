@@ -18,6 +18,6 @@ router.patch('/:id', updateBook);
 router.post('/', createBook);
 
 // DELETE /books/:id - Delete a book by ID
-router.delete('/:id',verifyAdmin, deleteBook);
+router.delete('/:id', deleteBook);
 
 export default router;
