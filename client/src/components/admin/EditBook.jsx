@@ -58,11 +58,11 @@ const EditBook = () => {
     const updatedData = removeEmptyFields(formData);
 
     try {
-        const adminToken = Cookies.get("adminToken");
-        if (!adminToken) {
-          setMessage("Authentication token not found. Please log in again.");
-            return;
-        }
+        // const adminToken = Cookies.get("adminToken");
+        // if (!adminToken) {
+        //   setMessage("Authentication token not found. Please log in again.");
+        //     return;
+        // }
 
         await axios.patch(`${REACT_APP_API_BACKEND}/books/${bookId}`, updatedData, {
             headers: { Authorization: `Bearer ${adminToken}` },

@@ -42,7 +42,7 @@ const AddBook = () => {
       const adminToken = Cookies.get("adminToken");
       console.log(adminToken);
       
-      if (!adminToken) throw new Error("Token missing");
+      // if (!adminToken) throw new Error("Token missing");
         // if (!adminToken) {
         //   setMessage("Authentication token not found. Please log in again.");
         //     return;

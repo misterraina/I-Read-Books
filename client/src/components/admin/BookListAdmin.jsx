@@ -28,13 +28,13 @@ const BookListAdmin = () => {
         try {
           // console.log(document.cookie); // To see all cookies available
 
-            const adminToken = Cookies.get('adminToken');
-            // console.log(adminToken);
+            // const adminToken = Cookies.get('adminToken');
+            // // console.log(adminToken);
             
-            if (!adminToken) {
-                setError("Authentication token not found. Please log in again.");
-                return;
-            }
+            // if (!adminToken) {
+            //     setError("Authentication token not found. Please log in again.");
+            //     return;
+            // }
             await axios.delete(`${REACT_APP_API_BACKEND}/books/${id}`, {
                 headers: { Authorization: `Bearer ${adminToken}` },
                 withCredentials: true, 
