@@ -57,7 +57,7 @@ authRoute.post('/login', async (req, res) => {
             httpOnly: true,
             secure: true,
             maxAge: 90 * 60 * 1000, // 90 minutes
-            domain:"i-read-books.vercel.app",
+            // domain:"i-read-books.vercel.app",
             sameSite: 'None', // Adjust depending on your frontend-backend setup
             path: '/', 
         });
@@ -91,7 +91,7 @@ authRoute.post('/logout', (req, res) => {
     // Clear the cookie by setting its expiration to the past
     res.clearCookie('adminToken', {
         httpOnly: true,
-        secure: false,
+        secure: true,
         sameSite: 'None', // Adjust SameSite as per your app's needs
         path: '/', // Match the path of the cookie
     });
