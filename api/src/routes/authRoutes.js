@@ -54,8 +54,8 @@ authRoute.post('/login', async (req, res) => {
 
         // Set token in an HTTP-only cookie
         res.cookie('adminToken', token, {
-            httpOnly: false,
-            secure: false,
+            httpOnly: true,
+            secure: true,
             maxAge: 90 * 60 * 1000, // 90 minutes
             domain:"i-read-books.vercel.app",
             sameSite: 'None', // Adjust depending on your frontend-backend setup
