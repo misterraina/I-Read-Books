@@ -57,7 +57,7 @@ authRoute.post('/login', async (req, res) => {
             httpOnly: false,
             secure: false,
             maxAge: 90 * 60 * 1000, // 90 minutes
-            domain:"https://i-read-books.vercel.app",
+            domain:"i-read-books.vercel.app",
             sameSite: 'Lax', // Adjust depending on your frontend-backend setup
             path: '/', 
         });
