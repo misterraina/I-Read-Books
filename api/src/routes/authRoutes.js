@@ -58,7 +58,7 @@ authRoute.post('/login', async (req, res) => {
             secure: false,
             maxAge: 90 * 60 * 1000, // 90 minutes
             domain:"i-read-books.vercel.app",
-            sameSite: 'Lax', // Adjust depending on your frontend-backend setup
+            sameSite: 'None', // Adjust depending on your frontend-backend setup
             path: '/', 
         });
 
@@ -92,7 +92,7 @@ authRoute.post('/logout', (req, res) => {
     res.clearCookie('adminToken', {
         httpOnly: true,
         secure: false,
-        sameSite: 'Lax', // Adjust SameSite as per your app's needs
+        sameSite: 'None', // Adjust SameSite as per your app's needs
         path: '/', // Match the path of the cookie
     });
     res.status(200).json({ message: 'Logout successful' });
