@@ -54,7 +54,7 @@ authRoute.post('/login', async (req, res) => {
 
         // Set token in an HTTP-only cookie
         res.cookie('adminToken', token, {
-            httpOnly: false,
+            httpOnly: true,
             secure: false,
             maxAge: 90 * 60 * 1000, // 90 minutes
             // domain:"i-read-books.vercel.app",
@@ -90,7 +90,7 @@ authRoute.get('/validate-token', (req, res) => {
 authRoute.post('/logout', (req, res) => {
     // Clear the cookie by setting its expiration to the past
     res.clearCookie('adminToken', {
-        httpOnly: false,
+        httpOnly: true,
         secure: false,
         sameSite: 'None', // Adjust SameSite as per your app's needs
         path: '/', // Match the path of the cookie
